@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Logout | FrameUp</title>
+  <script src="../es-auth-config.js?v=20260707-auth4"></script>
+  <script src="../es-auth.js?v=20260714-authcallback2"></script>
+  <script src="../dashboard-data.js?v=20260716-dashboard-sync1"></script>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Condensed:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="account.css">
+  <link rel="stylesheet" href="../site-mobile-chrome.css?v=20260723-profile2">
+<link rel="stylesheet" href="../theme.css?v=20260714-footer1">
+  <link rel="stylesheet" href="../site-chrome.css?v=20260817-icons1">
+  <link rel="stylesheet" href="../cta-hover.css?v=20260720-stroke1">
+  <link rel="stylesheet" href="../design-tokens.css?v=20260817-type1">
+  <script src="../theme.js?v=20260712-darkmode12"></script>
+  <script src="../site-mobile-chrome.js?v=20260723-profile2"></script>
+  <script src="../site-chrome.js?v=20260817-icons1"></script>
+</head>
+<body class="logout-page">
+  <div class="page">
+    <nav class="navbar">
+      <a class="navbar-logo" href="../index.html" aria-label="EssentiallySports home"><img src="assets/brand-logo-blue.svg" alt="EssentiallySports"></a>
+      <div class="navbar-menu">
+        <div class="nav-dropdown">
+          <a class="nav-trigger has-chevron" href="../index.html#intro" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <div class="nav-dropdown-menu" role="menu" aria-label="Resources">
+            <a href="../index.html#logo-guidelines" role="menuitem">Logo Guidelines</a>
+            <a href="../index.html#social-guidelines" role="menuitem">Social Media Guidelines</a>
+            <a href="../index.html#video-guidelines" role="menuitem">Video Guidelines</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a class="nav-trigger has-chevron" href="../index.html#frames" aria-haspopup="true" aria-expanded="false">Design Tools</a>
+          <div class="nav-dropdown-menu" role="menu" aria-label="Design workspaces">
+            <a href="../index.html#frames" role="menuitem">Home</a>
+            <a href="../index.html#instagram" role="menuitem">Social Media</a>
+            <a href="../index.html#youtube" role="menuitem">YouTube</a>
+            <a href="../index.html#newsletter" role="menuitem">Newsletter</a>
+            <a href="../reels.html" role="menuitem">Reel Captions</a>
+          </div>
+        </div>
+        <a href="../design-request.html">Design Request</a>
+        <a href="../dashboard.html" data-admin-only hidden>Dashboard</a>
+        <a href="../index.html#faq">FAQ</a>
+        <a href="../tool-feedback.html">Tool Feedback</a>
+      </div>
+      <div class="navbar-right">
+        <a class="navbar-icon-btn" href="https://www.facebook.com/essentiallysports" title="Facebook" aria-label="Facebook"><img src="../social-icons/nav-facebook.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://twitter.com/es_sportsnews" title="X" aria-label="X"><img src="../social-icons/nav-x.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.linkedin.com/company/essentiallysports" title="LinkedIn" aria-label="LinkedIn"><img src="../social-icons/nav-linkedin.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.instagram.com/essentiallysports" title="Instagram" aria-label="Instagram"><img src="../social-icons/nav-instagram.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.youtube.com/essentiallysports" title="YouTube" aria-label="YouTube"><img src="../social-icons/nav-youtube.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://news.google.com/publications/CAAqBwgKMJqW_gwwkoGBAw" title="Google News" aria-label="Google News"><img src="../social-icons/nav-google-news.svg" alt=""></a>
+        <div class="profile-menu" id="profile-menu"></div>
+      </div>
+    </nav>
+
+    <main class="account-main">
+      <div class="account-shell">
+        <section class="account-card logout-card">
+          <div class="logout-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M10 6H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M14 8l4 4-4 4M18 12H9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="account-kicker">FrameUp Account</div>
+          <h1 class="account-title">Log out of FrameUp?</h1>
+          <p class="account-subtitle" id="logout-copy">This ends only your current session. Your local profile and workspace preferences stay on this browser.</p>
+          <div class="actions" id="logout-actions">
+            <button class="primary-btn" id="confirm-logout" type="button">Log out</button>
+            <a class="secondary-btn" href="../index.html#frames">Stay signed in</a>
+          </div>
+          <div class="status-note" id="logout-status" aria-live="polite"></div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer" aria-label="Site footer"></footer>
+
+  <script src="account.js"></script>
+  <script>
+    document.getElementById('confirm-logout').addEventListener('click', async event => {
+      const button = event.currentTarget;
+      const status = document.getElementById('logout-status');
+      button.disabled = true;
+      button.textContent = 'Logging out…';
+      status.textContent = 'Ending your session…';
+      try {
+        await window.ESAuth?.logout?.();
+        sessionStorage.setItem('es.ai.loggedOut', 'true');
+        document.getElementById('logout-copy').textContent = 'You have been logged out of FrameUp on this device.';
+        status.textContent = 'Session ended.';
+        document.getElementById('logout-actions').innerHTML = '<a class="primary-btn" href="../login.html">Return to login</a><a class="secondary-btn" href="../index.html">FrameUp home</a>';
+      } catch (error) {
+        button.disabled = false;
+        button.textContent = 'Log out';
+        status.textContent = 'Could not end the session. Please try again.';
+        status.classList.add('is-error');
+      }
+    });
+  </script>
+</body>
+</html>

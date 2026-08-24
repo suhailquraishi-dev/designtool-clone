@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Settings | FrameUp</title>
+  <script src="../es-auth-config.js?v=20260707-auth4"></script>
+  <script src="../es-auth.js?v=20260714-authcallback2"></script>
+  <script src="../dashboard-data.js?v=20260716-dashboard-sync1"></script>
+  <script>
+    window.ESAuth?.requireAuth(`ai-page/settings.html${window.location.search}${window.location.hash}`);
+  </script>
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Roboto+Condensed:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="account.css">
+  <link rel="stylesheet" href="../site-mobile-chrome.css?v=20260723-profile2">
+<link rel="stylesheet" href="../theme.css?v=20260714-footer1">
+  <link rel="stylesheet" href="../site-chrome.css?v=20260817-icons1">
+  <link rel="stylesheet" href="../cta-hover.css?v=20260720-stroke1">
+  <link rel="stylesheet" href="../design-tokens.css?v=20260817-type1">
+  <script src="../theme.js?v=20260712-darkmode12"></script>
+  <script src="../site-mobile-chrome.js?v=20260723-profile2"></script>
+  <script src="../site-chrome.js?v=20260817-icons1"></script>
+</head>
+<body class="settings-page">
+  <div class="page">
+    <nav class="navbar">
+      <a class="navbar-logo" href="../index.html" aria-label="EssentiallySports home"><img src="assets/brand-logo-blue.svg" alt="EssentiallySports"></a>
+      <div class="navbar-menu">
+        <div class="nav-dropdown">
+          <a class="nav-trigger has-chevron" href="../index.html#intro" aria-haspopup="true" aria-expanded="false">Resources</a>
+          <div class="nav-dropdown-menu" role="menu" aria-label="Resources">
+            <a href="../index.html#logo-guidelines" role="menuitem">Logo Guidelines</a>
+            <a href="../index.html#social-guidelines" role="menuitem">Social Media Guidelines</a>
+            <a href="../index.html#video-guidelines" role="menuitem">Video Guidelines</a>
+          </div>
+        </div>
+        <div class="nav-dropdown">
+          <a class="nav-trigger has-chevron" href="../index.html#frames" aria-haspopup="true" aria-expanded="false">Design Tools</a>
+          <div class="nav-dropdown-menu" role="menu" aria-label="Design workspaces">
+            <a href="../index.html#frames" role="menuitem">Home</a>
+            <a href="../index.html#instagram" role="menuitem">Social Media</a>
+            <a href="../index.html#youtube" role="menuitem">YouTube</a>
+            <a href="../index.html#newsletter" role="menuitem">Newsletter</a>
+            <a href="../reels.html" role="menuitem">Reel Captions</a>
+          </div>
+        </div>
+        <a href="../design-request.html">Design Request</a>
+        <a href="../dashboard.html" data-admin-only hidden>Dashboard</a>
+        <a href="../index.html#faq">FAQ</a>
+        <a href="../tool-feedback.html">Tool Feedback</a>
+      </div>
+      <div class="navbar-right">
+        <a class="navbar-icon-btn" href="https://www.facebook.com/essentiallysports" title="Facebook" aria-label="Facebook"><img src="../social-icons/nav-facebook.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://twitter.com/es_sportsnews" title="X" aria-label="X"><img src="../social-icons/nav-x.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.linkedin.com/company/essentiallysports" title="LinkedIn" aria-label="LinkedIn"><img src="../social-icons/nav-linkedin.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.instagram.com/essentiallysports" title="Instagram" aria-label="Instagram"><img src="../social-icons/nav-instagram.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://www.youtube.com/essentiallysports" title="YouTube" aria-label="YouTube"><img src="../social-icons/nav-youtube.svg" alt=""></a>
+        <a class="navbar-icon-btn" href="https://news.google.com/publications/CAAqBwgKMJqW_gwwkoGBAw" title="Google News" aria-label="Google News"><img src="../social-icons/nav-google-news.svg" alt=""></a>
+        <div class="profile-menu" id="profile-menu"></div>
+      </div>
+    </nav>
+
+    <main class="account-main">
+      <div class="account-shell account-shell--compact">
+        <header class="account-page-header">
+          <div>
+            <div class="account-kicker">FrameUp Account</div>
+            <h1 class="account-title">Settings</h1>
+            <p class="account-subtitle">Choose how FrameUp looks and where your design work starts.</p>
+          </div>
+          <a class="secondary-btn account-header-action" href="../index.html#frames">Back to Design Tools</a>
+        </header>
+
+        <section class="account-card settings-editor" aria-labelledby="settings-heading">
+          <h2 id="settings-heading" class="sr-only">FrameUp settings</h2>
+          <div class="settings-section">
+            <div class="settings-section-copy">
+              <h3>Appearance</h3>
+              <p>Use the same theme across FrameUp pages and workspaces.</p>
+            </div>
+            <div class="settings-choice" role="group" aria-label="Appearance">
+              <button type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+              <button type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <div class="settings-section-copy">
+              <h3>Startup</h3>
+              <p>Control which workspace opens when you enter FrameUp without a direct link.</p>
+            </div>
+            <div class="settings-section-controls">
+              <div class="field">
+                <label for="start-page">Start page</label>
+                <select id="start-page">
+                  <option value="frames">Design Tools home</option>
+                  <option value="instagram">Social Media</option>
+                  <option value="youtube">YouTube</option>
+                  <option value="newsletter">Newsletter</option>
+                </select>
+              </div>
+              <label class="setting-row setting-row--compact" for="remember-workspace">
+                <span class="setting-copy">
+                  <span class="settings-label">Remember my last workspace</span>
+                  <span>Open the workspace you most recently used instead of the start page.</span>
+                </span>
+                <span class="toggle"><input id="remember-workspace" type="checkbox"><span></span></span>
+              </label>
+            </div>
+          </div>
+
+          <footer class="settings-actions">
+            <button class="primary-btn" id="save-settings" type="button">Save settings</button>
+            <button class="secondary-btn" id="reset-settings" type="button">Reset</button>
+            <div class="status-note" id="settings-status" aria-live="polite"></div>
+          </footer>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer class="site-footer" aria-label="Site footer"></footer>
+
+  <script src="account.js"></script>
+  <script>
+    const defaults = { theme: 'light', startPage: 'frames', rememberLastWorkspace: true };
+    const fields = {
+      startPage: document.getElementById('start-page'),
+      rememberLastWorkspace: document.getElementById('remember-workspace')
+    };
+    const status = document.getElementById('settings-status');
+    let selectedTheme = window.FrameUpTheme?.current?.() || 'light';
+
+    function syncThemeButtons() {
+      document.querySelectorAll('[data-theme-choice]').forEach(button => {
+        button.setAttribute('aria-pressed', String(button.dataset.themeChoice === selectedTheme));
+      });
+    }
+
+    function applySettings(settings) {
+      const data = { ...defaults, ...settings };
+      selectedTheme = window.FrameUpTheme?.current?.() || data.theme;
+      fields.startPage.value = data.startPage;
+      fields.rememberLastWorkspace.checked = Boolean(data.rememberLastWorkspace);
+      syncThemeButtons();
+    }
+
+    function collectSettings() {
+      return {
+        ...loadSettings(),
+        theme: selectedTheme,
+        startPage: fields.startPage.value,
+        rememberLastWorkspace: fields.rememberLastWorkspace.checked
+      };
+    }
+
+    document.querySelectorAll('[data-theme-choice]').forEach(button => {
+      button.addEventListener('click', () => {
+        selectedTheme = button.dataset.themeChoice;
+        window.FrameUpTheme?.apply?.(selectedTheme);
+        syncThemeButtons();
+      });
+    });
+
+    document.getElementById('save-settings').addEventListener('click', () => {
+      saveSettings(collectSettings());
+      status.textContent = 'Settings saved.';
+    });
+
+    document.getElementById('reset-settings').addEventListener('click', () => {
+      selectedTheme = defaults.theme;
+      window.FrameUpTheme?.apply?.(selectedTheme);
+      applySettings(defaults);
+      saveSettings({ ...loadSettings(), ...defaults });
+      try { localStorage.removeItem('frameup.lastWorkspace.v1'); } catch (error) {}
+      status.textContent = 'Settings reset.';
+    });
+
+    applySettings(loadSettings());
+  </script>
+</body>
+</html>

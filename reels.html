@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reel Captions | FrameUp</title>
+  <meta name="description" content="Speech-recognition captions, transcript editing, brand-safe styling, and lower thirds for ES short-form video.">
+  <script src="es-auth-config.js?v=20260707-auth4"></script>
+  <script src="es-auth.js?v=20260714-deleteaccount1"></script>
+  <script>
+    window.ESAuth?.requireAuth(`reels.html${window.location.search}${window.location.hash}`);
+  </script>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;family=Roboto+Condensed:wght@500;600;700;800;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site-mobile-chrome.css?v=20260817-mobile-editor2">
+  <link rel="stylesheet" href="theme.css?v=20260714-footer1">
+  <link rel="stylesheet" href="site-chrome.css?v=20260817-icons1">
+  <link rel="stylesheet" href="cta-hover.css?v=20260723-howrefine1">
+  <link rel="stylesheet" href="reels.css?v=20260817-mobile-editor2">
+  <link rel="stylesheet" href="design-tokens.css?v=20260817-type1">
+  <script src="theme.js?v=20260712-darkmode12"></script>
+  <script src="site-mobile-chrome.js?v=20260723-profile2"></script>
+  <script src="site-chrome.js?v=20260817-icons1"></script>
+</head>
+<body class="reels-page">
+  <nav class="navbar">
+    <a class="navbar-logo" href="index.html" aria-label="EssentiallySports home">
+      <img src="brand-logo-blue.svg" alt="EssentiallySports">
+    </a>
+    <div class="navbar-menu">
+      <div class="nav-dropdown">
+        <a class="nav-trigger has-chevron" href="index.html#intro" aria-haspopup="true" aria-expanded="false">Resources</a>
+        <div class="nav-dropdown-menu" role="menu" aria-label="Resources">
+          <a href="index.html#logo-guidelines" data-route="logo-guidelines" role="menuitem">Logo Guidelines</a>
+          <a href="index.html#social-guidelines" data-route="social-guidelines" role="menuitem">Social Media Guidelines</a>
+          <a href="index.html#video-guidelines" data-route="video-guidelines" role="menuitem">Video Guidelines</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a class="nav-trigger has-chevron" href="index.html#frames" data-route="frames" aria-haspopup="true" aria-expanded="false">Design Tools</a>
+        <div class="nav-dropdown-menu" role="menu" aria-label="Design workspaces">
+          <a href="index.html#frames" data-route="frames" role="menuitem">Home</a>
+          <a href="index.html#instagram" data-route="instagram" role="menuitem">Social Media</a>
+          <a href="index.html#youtube" data-route="youtube" role="menuitem">YouTube</a>
+          <a href="index.html#newsletter" data-route="newsletter" role="menuitem">Newsletter</a>
+          <a href="reels.html" role="menuitem">Reel Captions</a>
+        </div>
+      </div>
+      <a href="design-request.html">Design Request</a>
+      <a href="dashboard.html" data-admin-only hidden aria-hidden="true">Dashboard</a>
+      <a href="index.html#faq" data-route="faq">FAQ</a>
+      <a href="tool-feedback.html">Tool Feedback</a>
+    </div>
+    <div class="navbar-right">
+      <div class="profile-menu" id="profile-menu"></div>
+      <a class="navbar-icon-btn" href="https://www.facebook.com/essentiallysports" title="Facebook" aria-label="Facebook"><img src="social-icons/nav-facebook.svg" alt=""></a>
+      <a class="navbar-icon-btn" href="https://twitter.com/es_sportsnews" title="X" aria-label="X"><img src="social-icons/nav-x.svg" alt=""></a>
+      <a class="navbar-icon-btn" href="https://www.linkedin.com/company/essentiallysports" title="LinkedIn" aria-label="LinkedIn"><img src="social-icons/nav-linkedin.svg" alt=""></a>
+      <a class="navbar-icon-btn" href="https://www.instagram.com/essentiallysports" title="Instagram" aria-label="Instagram"><img src="social-icons/nav-instagram.svg" alt=""></a>
+      <a class="navbar-icon-btn" href="https://www.youtube.com/essentiallysports" title="YouTube" aria-label="YouTube"><img src="social-icons/nav-youtube.svg" alt=""></a>
+      <a class="navbar-icon-btn" href="https://news.google.com/publications/CAAqBwgKMJqW_gwwkoGBAw" title="Google News" aria-label="Google News"><img src="social-icons/nav-google-news.svg" alt=""></a>
+    </div>
+  </nav>
+
+  <main>
+    <div class="reels-mobile-topbar" aria-label="Mobile Reels workspace bar">
+      <a class="reels-mobile-back" href="index.html#frames" aria-label="Back to Design Tools" title="Back to Design Tools">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+      <div>
+        <span>FrameUp</span>
+        <strong>Reel Captions</strong>
+      </div>
+      <button type="button" data-reels-mobile-export>Export</button>
+    </div>
+    <section class="reels-shell" aria-label="Reels caption editor">
+      <aside class="reels-task-panel" aria-label="Active Reels tool">
+        <section class="reels-task-section is-active" data-reels-panel="captions">
+          <span id="reels-transcript-source" hidden>No speech recognition yet</span>
+          <div class="reels-command-bar">
+            <button type="button" class="reels-btn is-primary" id="reels-transcribe-btn" disabled>Auto-caption</button>
+            <button type="button" class="reels-btn is-quiet" id="reels-add-caption-btn" disabled>Add Caption</button>
+            <button type="button" class="reels-btn is-quiet" id="reels-download-srt-btn" disabled>Download SRT</button>
+          </div>
+          <p class="reels-status" id="reels-transcribe-status" hidden>Upload a clip to begin.</p>
+          <div class="reels-transcript-list" id="reels-transcript-list">
+            <button type="button" class="reels-btn is-secondary reels-empty-upload" id="reels-upload-btn" data-reels-upload-trigger>Upload Clip</button>
+          </div>
+        </section>
+
+        <section class="reels-task-section" data-reels-panel="style">
+          <div class="reels-panel-head">
+            <div>
+              <h2>Caption Styles</h2>
+              <p>Use the inspector to set position, sport, team, and color.</p>
+            </div>
+          </div>
+          <div class="reels-helper-card">
+            <strong>Style Inspector</strong>
+            <span>Caption presets, safe-zone placement, sport colors, and team palette controls stay pinned on the right.</span>
+          </div>
+        </section>
+
+        <section class="reels-task-section" data-reels-panel="lower-thirds">
+          <details class="reels-lower-thirds" open>
+            <summary>
+              <span>Lower Thirds</span>
+              <small id="reels-lt-count">0 placed</small>
+            </summary>
+            <div class="reels-lower-thirds-body">
+              <div class="reels-lt-grid" id="reels-lt-grid"></div>
+              <div class="reels-lt-list" id="reels-lt-list"></div>
+            </div>
+          </details>
+        </section>
+
+        <section class="reels-task-section" data-reels-panel="rewrite">
+          <div class="reels-panel-head">
+            <div>
+              <h2>Rewrite Helper</h2>
+              <p>Works on the selected caption.</p>
+            </div>
+            <span id="reels-intel-source">Caption helper</span>
+          </div>
+          <textarea id="reels-intel-prompt" placeholder="Make this caption punchier, shorter, or more brand-safe"></textarea>
+          <button type="button" class="reels-btn is-secondary" id="reels-intel-btn" disabled>Apply rewrite</button>
+          <p class="reels-status" id="reels-intel-status"></p>
+        </section>
+      </aside>
+
+      <section class="reels-stage-workspace" aria-label="Reels preview and timeline">
+        <div class="reels-stage-frame">
+          <canvas id="reels-canvas"></canvas>
+          <div class="reels-stage-empty" id="reels-stage-empty"></div>
+        </div>
+        <input type="file" id="reels-file-input" accept="video/*" hidden>
+        <video id="reels-video" hidden playsinline crossorigin="anonymous"></video>
+
+        <div class="reels-bottom-panel">
+          <div class="reels-stage-controls">
+            <button type="button" class="reels-icon-btn" id="reels-play-btn" disabled aria-label="Play or pause">
+              <svg class="reels-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"/></svg>
+              <svg class="reels-pause-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="14" y="3" width="5" height="18" rx="1"/><rect x="5" y="3" width="5" height="18" rx="1"/></svg>
+            </button>
+            <input type="range" class="reels-scrub" id="reels-scrub" min="0" max="1000" value="0" disabled aria-label="Video timeline">
+            <div class="reels-time-row">
+              <span id="reels-current-time">0:00</span>
+              <span id="reels-total-time">0:00</span>
+            </div>
+          </div>
+          <p class="reels-status" id="reels-export-status"></p>
+
+          <div class="reels-timeline-card">
+            <div class="reels-timeline-head">
+              <div>
+                <strong>Caption Timeline</strong>
+                <span>Select a caption to adjust timing</span>
+              </div>
+              <div class="reels-timeline-tools">
+                <span id="reels-caption-count">0 segments</span>
+                <div class="reels-zoom-cluster">
+                  <button type="button" class="reels-icon-btn is-mini" id="reels-zoom-out" aria-label="Zoom out" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="8" x2="14" y1="11" y2="11"/></svg></button>
+                  <button type="button" class="reels-zoom-reset" id="reels-zoom-level" title="Reset zoom" aria-live="polite">Fit</button>
+                  <button type="button" class="reels-icon-btn is-mini" id="reels-zoom-in" aria-label="Zoom in"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" x2="16.65" y1="21" y2="16.65"/><line x1="11" x2="11" y1="8" y2="14"/><line x1="8" x2="14" y1="11" y2="11"/></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="reels-timeline-viewport" id="reels-timeline-viewport" role="group" aria-label="Caption timeline">
+              <div class="reels-timeline-canvas" id="reels-timeline-canvas">
+                <div class="reels-timeline-ruler" id="reels-timeline-ruler" aria-hidden="true"></div>
+                <div class="reels-timeline" id="reels-caption-timeline" aria-label="Caption timing segments"></div>
+                <div class="reels-playhead" id="reels-playhead" hidden role="slider" aria-label="Playhead" tabindex="0"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="reels-side-panel" aria-label="Caption styling inspector">
+          <section class="reels-tool-section">
+            <div class="reels-inspector-actions">
+              <button type="button" class="reels-btn is-primary reels-top-export" id="reels-export-btn" disabled>Export</button>
+              <span id="reels-style-name" hidden>Broadcast</span>
+            </div>
+            <label class="reels-field reels-tool-dropdown">
+              <span>Tool</span>
+              <select id="reels-tool-select" data-reels-tool-select aria-label="Reels tool">
+                <option value="captions">Captions</option>
+                <option value="style">Style</option>
+                <option value="lower-thirds">Lower Thirds</option>
+                <option value="rewrite">Rewrite</option>
+              </select>
+            </label>
+            <label class="reels-field reels-style-dropdown" hidden>
+              <span>Style</span>
+              <select id="reels-style-select" aria-label="Caption style"></select>
+            </label>
+            <label class="reels-field">
+              <span>Position</span>
+              <select id="reels-caption-position">
+                <option value="upper">Top</option>
+                <option value="center">Middle</option>
+                <option value="lower">Bottom</option>
+              </select>
+            </label>
+            <details class="reels-brand-card studio-accordion-section is-open" open>
+              <summary class="studio-accordion-trigger">
+                <span>Brand &amp; Colors</span>
+                <span class="studio-accordion-chevron" aria-hidden="true"></span>
+              </summary>
+              <div class="reels-brand-body studio-accordion-body">
+                <div class="field-row">
+                  <label class="field-group">
+                    <span class="section-label">Sports</span>
+                    <select id="reels-sport-select" aria-label="Caption sport"></select>
+                  </label>
+                  <label class="field-group">
+                    <span class="section-label" id="reels-team-label">Team</span>
+                    <select id="reels-team-select" aria-label="Caption team"></select>
+                  </label>
+                </div>
+                <div class="reels-brand-colors">
+                  <strong class="color-group-label">Pill &amp; Text</strong>
+                  <div class="reels-palette-row palette-row" id="reels-palette-row" aria-label="Caption pill color options"></div>
+                </div>
+              </div>
+            </details>
+          </section>
+      </aside>
+    </section>
+    <nav class="reels-mobile-nav" aria-label="Mobile Reels editor actions">
+      <button type="button" data-reels-tool="captions" aria-label="Open Captions tools">
+        <span class="reels-mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h11M4 18h8"/></svg></span>
+        <span>Captions</span>
+      </button>
+      <button type="button" data-reels-tool="style" aria-label="Open Style tools">
+        <span class="reels-mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4l10-10-4-4L4 16v4Z"/><path d="m12 8 4 4"/></svg></span>
+        <span>Style</span>
+      </button>
+      <button type="button" data-reels-tool="lower-thirds" aria-label="Open Lower Thirds tools">
+        <span class="reels-mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M6 14h7M6 17h11"/></svg></span>
+        <span>Lower</span>
+      </button>
+      <button type="button" data-reels-tool="rewrite" aria-label="Open Rewrite tools">
+        <span class="reels-mobile-nav-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 1.7 5.3L19 10l-5.3 1.7L12 17l-1.7-5.3L5 10l5.3-1.7L12 3Z"/><path d="m19 16 .8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8L19 16Z"/></svg></span>
+        <span>Rewrite</span>
+      </button>
+    </nav>
+  </main>
+
+  <footer class="site-footer" aria-label="Site footer"></footer>
+  <script src="brand-kit.js?v=20260728-reels1"></script>
+  <script src="reels.js?v=20260817-mobile-editor2"></script>
+</body>
+</html>

@@ -1,0 +1,814 @@
+/* FrameUp dark mode
+   This sheet loads after each page's local styles so the visual system stays
+   coherent without affecting the generated design canvas or exported artwork. */
+
+:root {
+  --theme-dark-base: #080808;
+  --theme-dark-surface: #121212;
+  --theme-dark-surface-raised: #1A1A1A;
+  --theme-dark-surface-hover: #232323;
+  --theme-dark-border: #303030;
+  --theme-dark-border-strong: #444444;
+  --theme-dark-text: #F3F5F7;
+  --theme-dark-text-muted: #B6B6B6;
+  --theme-dark-text-subtle: #8F8F8F;
+  --theme-dark-accent: #2586F7;
+  --theme-dark-accent-soft: rgba(37, 134, 247, .17);
+}
+
+.theme-switcher {
+  position: fixed;
+  z-index: 2600;
+  top: 78px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.theme-switcher--floating {
+  top: 20px;
+}
+
+.theme-switch {
+  width: 52px;
+  height: 30px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px;
+  border: 1px solid rgba(16, 24, 40, .15);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, .94);
+  color: #344054;
+  box-shadow: none;
+  cursor: pointer;
+  pointer-events: auto;
+  transition: background-color .22s ease, border-color .22s ease, box-shadow .22s ease;
+}
+
+.theme-switch:hover,
+.theme-switch:focus-visible {
+  border-color: #8CB9E8;
+  box-shadow: none;
+  outline: 0;
+}
+
+.theme-switch svg { width: 14px; height: 14px; display: block; }
+.theme-switch-sun { width: 16px; height: 16px; display: grid; place-items: center; margin-left: 2px; color: #667085; }
+.theme-switch-thumb { width: 22px; height: 22px; display: grid; place-items: center; border-radius: 50%; background: #111111; color: #fff; transform: translateX(0); transition: transform .24s cubic-bezier(.2,.9,.2,1), background-color .22s ease, color .22s ease; }
+
+html[data-theme="dark"] .theme-switch {
+  border-color: #3B4856;
+  background: #1B222A;
+  color: #fff;
+  box-shadow: none;
+}
+
+html[data-theme="dark"] .theme-switch-sun { color: #7F8B99; }
+html[data-theme="dark"] .theme-switch-thumb { background: #F2F2F2; color: #111111; transform: translateX(-22px); }
+
+html[data-theme="dark"],
+html[data-theme="dark"] body {
+  background: var(--theme-dark-base) !important;
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] body,
+html[data-theme="dark"] .page,
+html[data-theme="dark"] .frame-home,
+html[data-theme="dark"] .request-page,
+html[data-theme="dark"] .guidelines-page,
+html[data-theme="dark"] .faq-page,
+html[data-theme="dark"] .workspace,
+html[data-theme="dark"] .dashboard-app,
+html[data-theme="dark"] .dashboard-main,
+html[data-theme="dark"] .dashboard-shell,
+html[data-theme="dark"] .account-main,
+html[data-theme="dark"] .login-shell,
+html[data-theme="dark"] .login-showcase,
+html[data-theme="dark"] .app[data-workspace] {
+  background: var(--theme-dark-base) !important;
+  color: var(--theme-dark-text) !important;
+}
+
+/* Keep the shared site navbar exactly as it is in light mode. The dark theme
+   starts below it; only product-specific chrome changes here. */
+html[data-theme="dark"] .dashboard-topbar,
+html[data-theme="dark"] .dashboard-sidebar,
+html[data-theme="dark"] .studio-topbar,
+html[data-theme="dark"] .studio-rail,
+html[data-theme="dark"] .site-footer {
+  background: var(--theme-dark-surface) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] .dashboard-topbar {
+  border-bottom-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"] .sidebar-nav button,
+html[data-theme="dark"] .sidebar-nav a {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] .sidebar-nav button:hover,
+html[data-theme="dark"] .sidebar-nav a:hover {
+  background: var(--theme-dark-surface-hover) !important;
+}
+
+html[data-theme="dark"] .sidebar-workspace,
+html[data-theme="dark"] .sidebar-nav button.is-active {
+  border-color: var(--theme-dark-border-strong) !important;
+  background: var(--theme-dark-surface-raised) !important;
+}
+
+html[data-theme="dark"] .footer-social img {
+  filter: invert(1);
+}
+
+html[data-theme="dark"] :is(.site-footer a, .site-footer h2, .site-footer h3) {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] .person-avatar,
+html[data-theme="dark"] .live-avatar {
+  background: #292929 !important;
+  color: #fff !important;
+}
+
+html[data-theme="dark"] .profile-avatar:not(.has-image) {
+  border-color: #B5D8FD !important;
+  background: #FFFFFF url("profile-icon-edit.svg") center / 15px 18px no-repeat !important;
+  color: transparent !important;
+}
+
+html[data-theme="dark"] .profile-avatar.has-image {
+  border-color: transparent !important;
+  background-position: center !important;
+  background-size: cover !important;
+}
+
+html[data-theme="dark"] body.dashboard-page :is(
+  .panel-head,
+  .live-list,
+  .people-list,
+  .activity-list,
+  .access-request-list,
+  .export-list,
+  .export-list-head,
+  .dashboard-choice-menu,
+  .dashboard-choice-trigger,
+  .command-search,
+  .metric-card,
+  .sidebar-workspace
+) {
+  background: var(--theme-dark-surface) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page :is(
+  .live-person,
+  .person,
+  .activity,
+  .access-request-card,
+  .export-list-row,
+  .task-card,
+  .kanban-column header
+) {
+  background: var(--theme-dark-surface) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page :is(
+  .dashboard-sidebar .sidebar-workspace strong,
+  .dashboard-sidebar .sidebar-workspace small,
+  .panel-title,
+  .item-title,
+  .activity strong,
+  .live-person strong,
+  .person-main strong,
+  .export-list-title strong,
+  .metric-value,
+  .dashboard-welcome h2
+) {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page :is(
+  .panel-subtitle,
+  .person-main span,
+  .person-main small,
+  .activity span,
+  .live-person small,
+  .item-meta,
+  .metric-label,
+  .export-list-title small,
+  .export-list-row,
+  .empty
+) {
+  color: var(--theme-dark-text-muted) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-choice-option:hover,
+html[data-theme="dark"] body.dashboard-page .dashboard-choice-option.is-selected,
+html[data-theme="dark"] body.dashboard-page .live-person:hover,
+html[data-theme="dark"] body.dashboard-page .person:hover,
+html[data-theme="dark"] body.dashboard-page .activity:hover,
+html[data-theme="dark"] body.dashboard-page .export-list-row:hover {
+  background: var(--theme-dark-surface-hover) !important;
+}
+
+/* Neutral content surfaces. */
+html[data-theme="dark"] :is(
+  .card,
+  .frame-card,
+  .frame-card-body,
+  .text-card,
+  .advanced-card,
+  .request-card,
+  .request-note,
+  .faq-item,
+  .faq-contact,
+  .home-feature-card,
+  .workspace-card,
+  .guidelines-faq,
+  .login-panel,
+  .login-feature-card,
+  .reset-card,
+  .account-card,
+  .assistant-panel,
+  .workspace-card-body,
+  .panel,
+  .metric-card,
+  .dashboard-welcome,
+  .kanban-column,
+  .task-card,
+  .export-review-card,
+  .task-drawer-panel,
+  .export-preview-panel,
+  .studio-control-dock,
+  .studio-inspector-tabs,
+  .image-tool-panel,
+  .ai-image-picker,
+  .select-dropdown-menu,
+  .select-dropdown,
+  .photo-drop,
+  .swipe-button-control,
+  .toggle-row,
+  .youtube-control-row,
+  .newsletter-control-row
+) {
+  background: var(--theme-dark-surface) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .18) !important;
+}
+
+html[data-theme="dark"] :is(.canvas-panel, .canvas-card, .canvas-stage, .studio-dock-section) {
+  background: var(--theme-dark-surface-raised) !important;
+  border-color: var(--theme-dark-border) !important;
+}
+
+/* The creative canvas remains intentionally white: dark mode changes the UI,
+   not the resulting social/newsletter artwork. */
+html[data-theme="dark"] :is(canvas#preview, .canvas-wrap, .canvas-stack) {
+  background: #fff !important;
+}
+
+html[data-theme="dark"] :is(
+  h1, h2, h3, h4, h5, h6,
+  .page-title, .page-header, .guidelines-title, .guidelines-section-title,
+  .request-card-title, .request-note-title, .faq-item h2,
+  .card-title, .section-label, .tod-label, .color-group-label,
+  .workspace-card-title, .home-feature-title, .login-title,
+  .account-title, .summary-name, .panel-title, .metric-value,
+  .task-card h3, .item-title, .export-list-title strong,
+  .drawer-section h3, .task-drawer-panel h2
+) {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] :is(
+  p, label, li, small, .request-card-copy, .request-help,
+  .account-subtitle, .panel-subtitle, .item-meta, .task-card-meta,
+  .export-list-title small, .export-list-row, .drawer-meta,
+  .drawer-section p, .drawer-links, .metric-label, .login-note,
+  .feature-copy p, .workspace-card-subtitle, .faq-item p,
+  .person-main span, .person-main small, .activity span, .live-person small,
+  .sidebar-workspace small, .sidebar-label, .presence-state
+) {
+  color: var(--theme-dark-text-muted) !important;
+}
+
+html[data-theme="dark"] :is(input, textarea, select, .select-dropdown-trigger, .studio-name-field, .studio-ai-search, .command-search, .dashboard-choice-trigger, .filter, .table-control, .login-mode-tab) {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"] :is(.request-dropdown-trigger, .request-dropdown-menu, .request-type-guide) {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"] .request-dropdown:not(.is-disabled) .request-dropdown-trigger:hover,
+html[data-theme="dark"] .request-dropdown.is-open .request-dropdown-trigger {
+  background: var(--theme-dark-surface-hover) !important;
+}
+
+html[data-theme="dark"] .request-dropdown-option {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] .request-dropdown-option:hover,
+html[data-theme="dark"] .request-dropdown-option:focus-visible,
+html[data-theme="dark"] .request-dropdown-option.is-selected {
+  background: var(--theme-dark-accent-soft) !important;
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] :is(input, textarea, select)::placeholder {
+  color: var(--theme-dark-text-subtle) !important;
+}
+
+html[data-theme="dark"] :is(.btn-secondary, .secondary-btn, .topbar-button:not(.is-primary), .canvas-upload-button-secondary, .studio-home-btn, .studio-zoom-btn, .studio-rail-btn, .image-tool-button) {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"] :is(.btn-primary, .login-button, .topbar-button.is-primary, .studio-export-btn, .canvas-upload-button, .workspace-cta) {
+  background: var(--theme-dark-accent) !important;
+  border-color: var(--theme-dark-accent) !important;
+  color: #fff !important;
+}
+
+html[data-theme="dark"] :is(.btn-primary, .login-button, .topbar-button.is-primary, .studio-export-btn, .canvas-upload-button, .workspace-cta) :is(svg, path) {
+  color: #fff !important;
+  stroke: currentColor;
+}
+
+html[data-theme="dark"] :is(.post-type-option, .studio-inspector-tab, .select-dropdown-option, .dashboard-choice-option) {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text-muted) !important;
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] :is(.post-type-option.is-active, .studio-inspector-tab.is-active, .select-dropdown-option.is-selected, .dashboard-choice-option.is-selected, .sidebar-nav button.is-active) {
+  background: var(--theme-dark-accent-soft) !important;
+  color: #fff !important;
+  border-color: rgba(37, 134, 247, .52) !important;
+}
+
+html[data-theme="dark"] :is(.table-control, .filter, .dashboard-choice-trigger, .role-select, .drawer-grid select, .drawer-grid input, .drawer-notes textarea) {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] :is(table, th, td, .export-list-head, .export-list-row, .activity, .live-person, .person, .access-request-card) {
+  border-color: var(--theme-dark-border) !important;
+  color: var(--theme-dark-text-muted) !important;
+}
+
+html[data-theme="dark"] th,
+html[data-theme="dark"] .export-list-head {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text-subtle) !important;
+}
+
+html[data-theme="dark"] .kanban-dropzone.is-over,
+html[data-theme="dark"] .task-card:hover,
+html[data-theme="dark"] .export-list-row:hover,
+html[data-theme="dark"] .person:hover,
+html[data-theme="dark"] .activity:hover,
+html[data-theme="dark"] .live-person:hover {
+  background: var(--theme-dark-surface-hover) !important;
+}
+
+html[data-theme="dark"] .login-showcase,
+html[data-theme="dark"] .home-showcase,
+html[data-theme="dark"] .account-main,
+html[data-theme="dark"] .request-page,
+html[data-theme="dark"] .guidelines-page,
+html[data-theme="dark"] .faq-page {
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] .home-feature-visual,
+html[data-theme="dark"] .workspace-thumbnail,
+html[data-theme="dark"] .feature-visual {
+  background: transparent !important;
+}
+
+html[data-theme="dark"] .frame-hero,
+html[data-theme="dark"] .request-hero {
+  background: #EAF4FF !important;
+}
+
+html[data-theme="dark"] .frame-banner,
+html[data-theme="dark"] .request-hero img,
+html[data-theme="dark"] .request-hero video {
+  opacity: 1 !important;
+  filter: none !important;
+}
+
+html[data-theme="dark"] .logo-guidelines-card,
+html[data-theme="dark"] .guideline-slide {
+  background: #fff;
+}
+
+html[data-theme="dark"] .profile-dropdown,
+html[data-theme="dark"] .nav-dropdown-menu,
+html[data-theme="dark"] .dashboard-choice-menu,
+html[data-theme="dark"] .select-dropdown-menu {
+  box-shadow: 0 18px 42px rgba(0, 0, 0, .4) !important;
+}
+
+/* Semantic tags must retain their established meaning in both themes. */
+html[data-theme="dark"] body.dashboard-page .role-badge {
+  border-color: #dfe3e8 !important;
+  background: #f2f3f5 !important;
+  color: #4b5563 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-badge.is-admin,
+html[data-theme="dark"] body.dashboard-page .role-choice.is-admin .dashboard-choice-trigger {
+  border-color: #bfdbfe !important;
+  background: #eef6ff !important;
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-badge.is-super-admin,
+html[data-theme="dark"] body.dashboard-page .role-choice.is-super-admin .dashboard-choice-trigger {
+  border-color: #d8ccff !important;
+  background: #f4f0ff !important;
+  color: #6d28d9 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-badge.is-server-owner,
+html[data-theme="dark"] body.dashboard-page .role-choice.is-server-owner .dashboard-choice-trigger {
+  border-color: #fdc98e !important;
+  background: #fff4e7 !important;
+  color: #c2410c !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-choice.is-associate .dashboard-choice-trigger {
+  border-color: #dfe3e8 !important;
+  background: #f2f3f5 !important;
+  color: #4b5563 !important;
+}
+
+/* The People panel uses native <details> role controls. Keep their semantic
+   colors intact in dark mode rather than letting the generic dark inputs win. */
+html[data-theme="dark"] body.dashboard-page .role-choice.is-associate .dashboard-role-summary {
+  border-color: #dfe3e8 !important;
+  background: #f2f3f5 !important;
+  color: #4b5563 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-choice.is-admin .dashboard-role-summary {
+  border-color: #bfdbfe !important;
+  background: #eef6ff !important;
+  color: #1d4ed8 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-choice.is-super-admin .dashboard-role-summary {
+  border-color: #d8ccff !important;
+  background: #f4f0ff !important;
+  color: #6d28d9 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .role-choice.is-server-owner .dashboard-role-summary {
+  border-color: #fdc98e !important;
+  background: #fff4e7 !important;
+  color: #c2410c !important;
+}
+
+/* The theme choice belongs to the profile menu wherever shared navigation is
+   present. Login and utility pages retain the compact floating control. */
+/* Profile menu rows are declared in several page-level stylesheets. Keep the
+   injected Appearance row on the same row system as Edit Profile / Settings so
+   the icon, label, and switch never drift apart across pages or themes. */
+.profile-dropdown [data-theme-switcher].profile-theme-option,
+.profile-theme-option {
+  width: 100% !important;
+  min-height: 46px !important;
+  box-sizing: border-box !important;
+  display: grid !important;
+  grid-template-columns: 20px minmax(0, 1fr) auto !important;
+  align-items: center !important;
+  justify-items: stretch !important;
+  gap: 12px !important;
+  padding: 0 14px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  color: #111111 !important;
+  font-family: "Roboto Condensed", "Roboto", Arial, sans-serif !important;
+  font-size: 14px !important;
+  font-weight: 500 !important;
+  line-height: 1.2 !important;
+  text-align: left !important;
+}
+
+.profile-dropdown {
+  width: 260px !important;
+  min-width: 260px !important;
+}
+
+.profile-dropdown .profile-option,
+.profile-dropdown .profile-theme-option {
+  min-height: 46px !important;
+}
+
+.profile-theme-option::before { display: none !important; }
+.profile-theme-icon {
+  width: 20px !important;
+  height: 20px !important;
+  display: grid !important;
+  place-items: center !important;
+  color: #0A7DFA !important;
+}
+.profile-theme-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  display: block !important;
+}
+.profile-theme-label {
+  min-width: 0 !important;
+  color: #000000 !important;
+  font: inherit !important;
+  line-height: 1.2 !important;
+  opacity: 1 !important;
+  text-align: left !important;
+}
+.profile-theme-option .theme-switch {
+  justify-self: end !important;
+  flex: 0 0 auto !important;
+  margin: 0 !important;
+}
+
+/* The profile dropdown is a light surface in light mode. Declare the label
+   explicitly so theme inheritance can never wash it out. */
+.profile-dropdown .profile-theme-option,
+.profile-dropdown .profile-theme-label {
+  color: #111111 !important;
+  opacity: 1 !important;
+}
+
+html[data-theme="dark"] .profile-theme-option {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] .profile-dropdown .profile-theme-option,
+html[data-theme="dark"] .profile-dropdown .profile-theme-label {
+  color: #111111 !important;
+}
+
+html[data-theme="dark"] .profile-theme-icon {
+  color: #69AEFF !important;
+}
+
+/* Homepage feature tags remain intentionally light cards in dark mode. */
+html[data-theme="dark"] .home-feature-tags span {
+  background: #F8FBFF !important;
+  border-color: #B5D8FD !important;
+  color: #07386F !important;
+}
+
+/* Dashboard search is one surface: the input itself must remain transparent. */
+html[data-theme="dark"] body.dashboard-page .command-search input {
+  background: transparent !important;
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .command-search input::placeholder {
+  color: var(--theme-dark-text-muted) !important;
+}
+
+/* Keep the FAQ contact line visible beneath the FAQ list instead of suppressing
+   the already-present contact markup in the editorial FAQ layout. */
+body[data-current-page="faq"] .faq-contact {
+  grid-column: 2;
+  display: block;
+  margin: 24px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body[data-current-page="faq"] .faq-contact h2 {
+  margin: 0 0 6px;
+  color: #111111;
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1;
+}
+
+body[data-current-page="faq"] .faq-contact p,
+body[data-current-page="faq"] .faq-contact a {
+  margin: 0;
+  font-family: var(--font-acumin-web);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+body[data-current-page="faq"] .faq-contact p { color: #53657A; }
+body[data-current-page="faq"] .faq-contact a { color: #0A7DFA; }
+
+html[data-theme="dark"] body[data-current-page="faq"] .faq-contact h2 { color: var(--theme-dark-text) !important; }
+html[data-theme="dark"] body[data-current-page="faq"] .faq-contact p { color: var(--theme-dark-text-muted) !important; }
+html[data-theme="dark"] body[data-current-page="faq"] .faq-contact a { color: #69AEFF !important; }
+
+/* Preserve the dashboard's time-of-day cue after the generic dark-card layer
+   is applied. The tint stays restrained, while the greeting carries the
+   clearer semantic color. */
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-morning {
+  background: linear-gradient(135deg, #171717 0%, #101010 100%) !important;
+  border-color: #353535 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-afternoon {
+  background: linear-gradient(135deg, #21180F 0%, #19130D 100%) !important;
+  border-color: #5A4325 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-evening {
+  background: linear-gradient(135deg, #171717 0%, #101010 100%) !important;
+  border-color: #353535 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-morning .welcome-kicker { color: #69AEFF !important; }
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-afternoon .welcome-kicker { color: #F5A524 !important; }
+html[data-theme="dark"] body.dashboard-page .dashboard-welcome.is-evening .welcome-kicker { color: #C4B5FD !important; }
+
+/* Presence is semantic information, not muted metadata. */
+html[data-theme="dark"] body.dashboard-page .presence-state.is-online { color: #32D583 !important; }
+html[data-theme="dark"] body.dashboard-page .presence-state.is-offline { color: #FF6B6B !important; }
+
+/* Export preview: let the artwork stand on its own without pale framing. */
+html[data-theme="dark"] body.dashboard-page .export-preview-panel {
+  background: var(--theme-dark-surface) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, .52) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .export-preview-panel img {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 16px;
+  clip-path: inset(0 round 16px);
+}
+
+/* Studio controls use dark UI surfaces; selected canvas colors themselves are
+   left untouched so a deliberate white swatch is still represented honestly. */
+html[data-theme="dark"][data-studio-shell="on"] .panel .swipe-button-control .quote-switch {
+  background: transparent !important;
+  border-color: var(--theme-dark-border-strong) !important;
+  color: var(--theme-dark-text) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .swipe-button-control .quote-switch > span:first-child {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .select-dropdown-option:hover,
+html[data-theme="dark"][data-studio-shell="on"] .panel .select-dropdown-option:focus-visible {
+  background: rgba(37, 134, 247, .12) !important;
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .select-dropdown-option.is-selected {
+  background: rgba(37, 134, 247, .18) !important;
+  color: #FFFFFF !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .select-dropdown-menu {
+  background: var(--theme-dark-surface) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .select-dropdown-option {
+  background: transparent !important;
+  color: var(--theme-dark-text) !important;
+}
+
+/* Studio-only mappings: the application chrome changes theme; the actual
+   export canvas remains white and is never recolored. */
+html[data-theme="dark"][data-studio-shell="on"] :is(
+  .studio-title,
+  .studio-dock-title,
+  .image-tool-title,
+  .image-tool-panel h3,
+  .image-tool-panel label,
+  .studio-control-dock label,
+  .panel .card h2,
+  .panel .card h3
+) {
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] :is(
+  .studio-dock-kicker,
+  .image-tool-empty,
+  .image-tool-panel p,
+  .studio-control-dock p,
+  .panel .card p
+) {
+  color: var(--theme-dark-text-muted) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel :is(
+  .swipe-button-control,
+  .toggle-row,
+  .youtube-control-row,
+  .newsletter-control-row
+) {
+  background: var(--theme-dark-surface-raised) !important;
+  border-color: var(--theme-dark-border) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .panel .swipe-button-control,
+html[data-theme="dark"][data-studio-shell="on"] .panel .swipe-button-control .quote-switch {
+  background: var(--theme-dark-surface-raised) !important;
+  color: var(--theme-dark-text) !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .canvas-bottom-actions {
+  background: #101010 !important;
+  border-color: var(--theme-dark-border-strong) !important;
+  box-shadow: none !important;
+}
+
+html[data-theme="dark"][data-studio-shell="on"] .canvas-bottom-actions .studio-zoom-group {
+  border-color: var(--theme-dark-border) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-card {
+  background: var(--theme-dark-surface) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .22) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-card.is-high {
+  border-color: #765327 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-card.is-urgent {
+  background: linear-gradient(90deg, rgba(180, 35, 24, .16) 0%, var(--theme-dark-surface) 44%) !important;
+  border-color: #78302C !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-type,
+html[data-theme="dark"] body.dashboard-page .task-priority {
+  border-color: #dfe3e8 !important;
+  background: #f7f8fa !important;
+  color: #4b5563 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-priority.is-high {
+  border-color: #f3d6a5 !important;
+  background: #fff7ed !important;
+  color: #b45309 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .task-priority.is-urgent {
+  border-color: #f3b8b4 !important;
+  background: #fff1f1 !important;
+  color: #b42318 !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-role-menu,
+html[data-theme="dark"] body.dashboard-page .dashboard-choice-menu {
+  background: var(--theme-dark-surface-raised) !important;
+  border-color: var(--theme-dark-border-strong) !important;
+}
+
+html[data-theme="dark"] body.dashboard-page .dashboard-role-option,
+html[data-theme="dark"] body.dashboard-page .dashboard-choice-option {
+  color: var(--theme-dark-text) !important;
+}
+
+/* Keep footer content readable in dark mode without erasing the light footer. */
+html[data-theme="dark"] .site-footer :is(p, a, small, span, .footer-copy, .footer-legal) {
+  color: #FFFFFF !important;
+}
+
+@media (max-width: 680px) {
+  .theme-switcher { top: 76px; right: 16px; }
+  .theme-switcher--floating { top: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-switch,
+  .theme-switch-thumb { transition: none; }
+}
