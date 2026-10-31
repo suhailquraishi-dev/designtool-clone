@@ -2539,7 +2539,7 @@
 
         const hasValidSession = await sessionPromise;
         if (!hasValidSession) {
-          window.location.replace(window.ESAuth?.loginUrl?.('dashboard.html') || 'login.html?redirect=dashboard.html');
+          window.location.replace('index.html#frames');
           return;
         }
 

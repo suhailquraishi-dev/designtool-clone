@@ -317,6 +317,9 @@
     if (!auth || !(await auth.ensureSupabaseReady())) return [];
     const client = auth.getSupabaseClient();
     if (!client) return [];
+    // Guests (no login in this build) can't read the stars; skip the request.
+    const { data: sessionData } = await client.auth.getSession();
+    if (!sessionData?.session) return [];
     const { data, error } = await client.rpc('get_frameup_star_user', { p_days: STAR_DAYS });
     if (error) return [];
     const stars = (Array.isArray(data) ? data : [])

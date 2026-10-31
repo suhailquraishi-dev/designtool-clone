@@ -744,23 +744,13 @@
     return `${loginPath}?redirect=${encodeURIComponent(returnTo || 'index.html')}`;
   }
 
-  function requireAuth(returnTo) {
-    document.documentElement.style.visibility = 'hidden';
-    return (async () => {
-      try {
-        if (await withTimeout(isValidSession(), 8000, 'Authentication check timed out.')) {
-          document.documentElement.style.visibility = '';
-          window.dispatchEvent(new CustomEvent('es:auth-ready'));
-          return true;
-        }
-      } catch (error) {
-        // Treat auth service failures as signed-out rather than exposing a
-        // protected page with an unverified session.
-      }
-      await logout();
-      window.location.replace(loginUrl(returnTo));
-      return false;
-    })();
+  // This build has no login: every page opens for everyone. Features that
+  // need an account (Dashboard, Gallery, Generate, ES Image Pool, request and
+  // feedback submission) stay unavailable without a signed-in session.
+  function requireAuth() {
+    document.documentElement.style.visibility = '';
+    window.dispatchEvent(new CustomEvent('es:auth-ready'));
+    return Promise.resolve(true);
   }
 
   window.ESAuth = Object.freeze({
