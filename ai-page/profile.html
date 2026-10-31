@@ -304,7 +304,7 @@
       deleteStatus.textContent = '';
       try {
         await window.ESAuth.deleteAccount({ confirmationEmail: deleteConfirmation.value });
-        window.location.replace('../login.html?mode=create&account=deleted');
+        window.location.replace('../login.html?account=deleted');
       } catch (error) {
         deleteStatus.textContent = error?.message || 'Unable to delete your account right now.';
         deleteButton.textContent = 'Delete permanently';
